@@ -52,7 +52,7 @@ public class Events {
 
       ServerStatusResponse response = FMLCommonHandler.instance().getMinecraftServerInstance().getServerStatusResponse();
       TextFormatting colour;
-      if (hours < 12)
+      if (server.isDaytime())
          colour = TextFormatting.GREEN;
       else
          colour = TextFormatting.RED;
