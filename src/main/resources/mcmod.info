@@ -1,0 +1,16 @@
+[
+{
+  "modid": "canijoinnow",
+  "name": "Can I Join Now?",
+  "description": "\"Can I Join Now?\" is question asked by many players. What time is it on the remote server?",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["CallMeFoxie"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
