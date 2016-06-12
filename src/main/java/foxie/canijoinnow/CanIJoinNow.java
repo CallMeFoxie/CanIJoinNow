@@ -4,7 +4,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = CanIJoinNow.MODID, name = CanIJoinNow.NAME, version = CanIJoinNow.VERSION)
+@Mod(modid = CanIJoinNow.MODID, name = CanIJoinNow.NAME, version = CanIJoinNow.VERSION, acceptableRemoteVersions = "*")
 public class CanIJoinNow {
    public static final String MODID   = "canijoinnow";
    public static final String NAME    = "Can I Join Now?";
