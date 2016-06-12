@@ -59,7 +59,7 @@ public class Events {
 
       // wrap around 24h clock
       hours += 6;
-      if (hours > 24)
+      if (hours >= 24)
          hours -= 24;
 
       response.setServerDescription(new TextComponentString(baseMOTD + " " + colour +
