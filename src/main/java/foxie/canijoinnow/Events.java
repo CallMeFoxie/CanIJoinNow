@@ -1,6 +1,5 @@
 package foxie.canijoinnow;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -8,6 +7,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.network.ServerStatusResponse;
 import net.minecraft.server.dedicated.PropertyManager;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -52,11 +52,11 @@ public class Events {
       int hours = (int) (ticks / 1000), minutes = (int) ((ticks % 1000) * 3 / 50);
 
       ServerStatusResponse response = FMLCommonHandler.instance().getMinecraftServerInstance().func_147134_at();
-      ChatFormatting colour;
+      EnumChatFormatting colour;
       if (server.isDaytime())
-         colour = ChatFormatting.GREEN;
+         colour = EnumChatFormatting.GREEN;
       else
-         colour = ChatFormatting.RED;
+         colour = EnumChatFormatting.RED;
 
       // wrap around 24h clock
       hours += 6;
