@@ -1,8 +1,10 @@
 package foxie.canijoinnow;
 
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.relauncher.Side;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = CanIJoinNow.MODID, name = CanIJoinNow.NAME, version = CanIJoinNow.VERSION, acceptableRemoteVersions = "*")
 public class CanIJoinNow {

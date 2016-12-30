@@ -11,11 +11,11 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'forge'
 
 ext.configFile = file "build.properties"
 
@@ -38,7 +38,6 @@ archivesBaseName = "CanIJoinNow"
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
     runDir = "run"
-    mappings = config.mappings
     replaceIn "foxie/CanIJoinNow/CanIJoinNow.java"
     replace "@VERSION@", "${config.mod_version}"
 }
