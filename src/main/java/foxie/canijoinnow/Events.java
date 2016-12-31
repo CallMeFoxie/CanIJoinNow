@@ -1,7 +1,6 @@
 package foxie.canijoinnow;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.network.ServerStatusResponse;
@@ -22,6 +21,7 @@ public class Events {
 
    PropertyManager settings;
    String baseMOTD = "";
+   WorldServer server;
 
    public void preinit() {
       settings = new PropertyManager(new File("server.properties"));
@@ -36,8 +36,15 @@ public class Events {
    public void postinit() {
    }
 
-   public void serverStarted(FMLServerStartedEvent event) {
+   private void loadServer() {
+      try {
+         server = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(Config.dimID);
+      } catch(RuntimeException e) {
+         throw new RuntimeException("Dimension ID " + Config.dimID + " does not seem to exist!");
+      }
 
+      if (server == null)
+         throw new RuntimeException("Dimension ID " + Config.dimID + " does not seem to exist!");
    }
 
    @SubscribeEvent
@@ -45,7 +52,8 @@ public class Events {
       if (event.phase != TickEvent.Phase.START)
          return;
 
-      WorldServer server = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
+      if (server == null)
+         loadServer();
 
       long ticks = server.getWorldTime() % 24000;
 

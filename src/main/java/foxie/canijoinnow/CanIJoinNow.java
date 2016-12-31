@@ -21,17 +21,20 @@ public class CanIJoinNow {
 
    @Mod.EventHandler
    public void preinit(FMLPreInitializationEvent event) {
+      config = new Config(event.getSuggestedConfigurationFile());
+      config.preinit();
+
       if(event.getSide() != Side.SERVER)
          return;
 
       events = new Events();
-      config = new Config(event.getSuggestedConfigurationFile());
-
       events.preinit();
    }
 
    @Mod.EventHandler
    public void init(FMLInitializationEvent event) {
+      config.init();
+
       if(event.getSide() != Side.SERVER)
          return;
 
@@ -40,6 +43,8 @@ public class CanIJoinNow {
 
    @Mod.EventHandler
    public void postinit(FMLPostInitializationEvent event) {
+      config.postinit();
+
       if(event.getSide() != Side.SERVER)
          return;
 
