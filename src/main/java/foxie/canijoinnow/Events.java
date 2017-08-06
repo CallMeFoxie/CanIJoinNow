@@ -7,7 +7,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -22,6 +21,7 @@ public class Events {
 
    PropertyManager settings;
    String baseMOTD = "";
+   WorldServer server;
 
    public void preinit() {
       settings = new PropertyManager(new File("server.properties"));
@@ -35,8 +35,15 @@ public class Events {
    public void postinit() {
    }
 
-   public void serverStarted(FMLServerStartedEvent event) {
+   private void loadServer() {
+      try {
+         server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(Config.dimID);
+      } catch (RuntimeException e) {
+         throw new RuntimeException("Dimension ID " + Config.dimID + " does not seem to exist!");
+      }
 
+      if (server == null)
+         throw new RuntimeException("Dimension ID " + Config.dimID + " does not seem to exist!");
    }
 
    @SubscribeEvent
@@ -44,7 +51,8 @@ public class Events {
       if (event.phase != TickEvent.Phase.START)
          return;
 
-      WorldServer server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
+      if (server == null)
+         loadServer();
 
       long ticks = server.getWorldTime() % 24000;
 
