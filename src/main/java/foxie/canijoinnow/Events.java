@@ -44,7 +44,7 @@ public class Events {
       if (event.phase != TickEvent.Phase.START)
          return;
 
-      WorldServer server = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(0);
+      WorldServer server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
 
       long ticks = server.getWorldTime() % 24000;
 
