@@ -16,7 +16,7 @@ public class Config {
    }
 
    public void preinit() {
-      dimID = this.cfg.getInt("dimension", "config", dimID, -1000, 1000, "Dimension ID to show in MoTD");
+      dimID = this.cfg.getInt("dimension", "config", dimID, Integer.MIN_VALUE, Integer.MAX_VALUE, "Dimension ID to show in MoTD");
    }
 
    public void init() {
