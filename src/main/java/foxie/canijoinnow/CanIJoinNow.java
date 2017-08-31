@@ -13,7 +13,7 @@ public class CanIJoinNow {
    @Mod.Instance(MODID)
    public static CanIJoinNow INSTANCE;
 
-   private static Config config;
+   public static Config config;
 
    private Events events;
 

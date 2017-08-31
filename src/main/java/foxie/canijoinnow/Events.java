@@ -54,9 +54,7 @@ public class Events {
       if (server == null)
          loadServer();
 
-      long ticks = server.getWorldTime() % 24000;
-
-      int hours = (int) (ticks / 1000), minutes = (int) ((ticks % 1000) * 3 / 50);
+      long ticks = server.getWorldTime();
 
       ServerStatusResponse response = FMLCommonHandler.instance().getMinecraftServerInstance().getServerStatusResponse();
       TextFormatting colour;
@@ -65,12 +63,28 @@ public class Events {
       else
          colour = TextFormatting.RED;
 
-      // wrap around 24h clock
-      hours += 6;
+      response.setServerDescription(new TextComponentString(baseMOTD + " " + colour + format(ticks)));
+   }
+
+   private String format(long ticks) {
+      long dayticks = ticks % 24000;
+      int hours = ((int) (dayticks / 1000) + 6); // +6 to humanize
       if (hours >= 24)
          hours -= 24;
 
-      response.setServerDescription(new TextComponentString(baseMOTD + " " + colour +
-              String.format("%02d", hours) + ":" + String.format("%02d", minutes)));
+      int minutes = (int) ((dayticks % 1000) * 3 / 50);
+      int day = (int) (ticks / 24000);
+      int week = (day / CanIJoinNow.config.weeklength) + 1; // +1 to humanize
+      int dayofweek = (day % CanIJoinNow.config.weeklength) + 1; // +1 to humanize
+      day += 1; // +1 to humanize
+
+      String formatted = CanIJoinNow.config.dateformat
+              .replace("%d", String.format("%d", day))
+              .replace("%w", String.format("%d", week))
+              .replace("%h", String.format("%02d", hours))
+              .replace("%m", String.format("%02d", minutes))
+              .replace("%o", String.format("%d", dayofweek));
+
+      return formatted;
    }
 }
